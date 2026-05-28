@@ -1,0 +1,161 @@
+/* --- Estilos Generales del Consultorio --- */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f4f7f9;
+    color: #2c3e50;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 15px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-bottom: 4px solid #2e5bff;
+    width: 100%;
+    max-width: 1050px;
+    box-sizing: border-box;
+}
+
+header h1 {
+    color: #1a2e7a;
+    font-size: 26px;
+    margin: 0;
+}
+
+h3 {
+    color: #1a2e7a;
+    text-align: center;
+    background-color: #e3ebfc;
+    padding: 12px;
+    border-radius: 5px;
+    margin: 30px auto 20px auto;
+    width: 100%;
+    max-width: 1050px;
+    box-sizing: border-box;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+#caja-formulario {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    border: 1px solid #e1e8ed;
+}
+
+.grid-dos-columnas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.columna {
+    flex: 1;
+    min-width: 300px;
+}
+
+.bloque-preguntas {
+    background-color: #f8fafc;
+    border-left: 4px solid #2e5bff;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 0 6px 6px 0;
+}
+
+p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin: 14px 0;
+    color: #34495e;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #2c3e50;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+#caja-formulario input[type="text"]:not([name]), 
+#caja-formulario input[type="number"]:not([name]),
+#caja-formulario input[type="date"] {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus, select:focus {
+    border-color: #2e5bff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(46, 91, 255, 0.15);
+}
+
+input[type="radio"], input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-left: 7px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #e1e8ed;
+    margin: 25px 0;
+}
+
+/* --- Estilos para la Tabla de Respuestas Guardadas --- */
+.tabla-pacientes {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #ffffff;
+}
+
+.tabla-pacientes th, .tabla-pacientes td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e1e8ed;
+    font-size: 14.5px;
+}
+
+.tabla-pacientes th {
+    background-color: #1a2e7a;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.tabla-pacientes tr:hover {
+    background-color: #f8fafc;
+}
+
+@media (max-width: 768px) {
+    .grid-dos-columnas { flex-direction: column; gap: 10px; }
+    header { flex-direction: column; text-align: center; gap: 10px; }
+}

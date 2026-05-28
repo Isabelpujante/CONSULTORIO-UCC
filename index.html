@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Consultorio Odontológico UCC</title>
+    <link rel="stylesheet" href="diseño.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<header>
+    <img src="logoucc.png" width="25%">
+    <h1>Consultorio Odontologico UCC</h1>
+</header>
+
+<div class="container" style="margin-top: 20px;">
+    <div id="caja-formulario" style="background-color: #e3ebfc; padding: 15px;">
+        <p style="margin: 0; font-weight: bold; color: #1a2e7a;">🔍 BUSCAR PACIENTE REGISTRADO PARA EDITAR O VER:</p>
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <input type="number" id="txt-buscar-dni" placeholder="Ingrese N° de Documento del paciente" style="flex: 1;">
+            <button type="button" id="btn-buscar" style="background-color: #1a2e7a; color: white; border: none; padding: 8px 20px; border-radius: 4px; cursor: pointer; font-weight: bold;">Buscar Datos</button>
+        </div>
+    </div>
+</div>
+
+<form id="formPrincipal">
+
+    <div class="container">
+        <div id="caja-formulario">
+            <p>ODONTOLOGO: <input type="text" name="Odontologo" id="Odontologo" placeholder="Odontologo" required></p>
+            <p>N° MATRICULA: <input type="number" name="N° Matricula" id="N° Matricula" placeholder="N°matricula" required></p>
+            <p>FECHA: <input type="date" name="Fecha" id="Fecha" placeholder="Fecha" required></p>
+            <hr>
+            <div class="grid-dos-columnas">
+                <div class="columna">
+                    <p>PACIENTE: <input type="text" name="Paciente" id="Paciente" placeholder="Paciente" required></p>
+                    <p>N° AFILIADO: <input type="number" name="N° Afiliado" id="N° Afiliado" placeholder="N° Afiliado" required></p>
+                    <p>OBRA SOCIAL: <input type="text" name="Obra Social" id="Obra Social" placeholder="Obra Social" required></p>
+                    <p>FECHA DE NACIMIENTO: <input type="date" name="Fecha de Nacimiento" id="Fecha de Nacimiento" placeholder="Fecha de Nacimiento" required></p>
+                    <p>TELEFONO: <input type="number" name="Telefono" id="Telefono" placeholder="Telefono" required></p>
+                    <p>EDAD: <input type="number" name="Edad" id="Edad" placeholder="Edad" required></p>
+                </div>
+                <div class="columna">
+                    <p>ESTADO CIVIL:
+                        <select name="Estado Civil">
+                            <option>Casado</option>
+                            <option>Soltero</option>
+                        </select>
+                    </p>
+                    <p>NACIONALIDAD: <input type="text" name="Nacionalidad" id="Nacionalidad" placeholder="Nacionalidad" required></p>
+                    <p>N° DE DOCUMENTO: <input type="number" name="documento" id="documento" placeholder="N° De Documento" required></p>
+                    <p>DOMICILIO: <input type="text" name="Domicilio" id="Domicilio" placeholder="Domicilio" required></p>
+                    <p>PROFESION: <input type="text" name="Profesion" id="Profesion" placeholder="Profesion" required></p>
+                    <p>TITULAR: <input type="text" name="Titular" id="Titular" placeholder="Titular"></p>
+                    <p>LUGAR DE TRABAJO: <input type="text" name="Lugar de trabajo" id="Lugar de trabajo" placeholder="Lugar De Trabajo"></p>
+                    <p>JERARQUIA: <input type="text" name="Jerarquia" id="Jerarquia" placeholder="Jerarquia"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3>Este cuestionario tiene el tenor de una "Declaracion Jurada"</h3>
+
+    <div class="container" style="margin-bottom: 60px;">
+        <div id="caja-formulario">
+            <div class="grid-dos-columnas">
+                <div class="columna">
+                    <div class="bloque-preguntas">
+                        <p>Padre con vida? si <input type="radio" name="padre" value="si"> no <input type="radio" name="padre" value="no" required></p>
+                        <p>Enfermedad que padece o padecio: <input type="text" name="padre_enfermedad" id="padre"></p>
+
+                        <p>Madre con vida? si <input type="radio" name="madre" value="si"> no <input type="radio" name="madre" value="no" required></p>
+                        <p>Enfermedad que padece o padecio: <input type="text" name="madre_enfermedad" id="madre"></p>
+
+                        <p>Hermanos? si <input type="radio" name="hermanos" value="si"> no <input type="radio" name="hermanos" value="no" required>
+                        Sanos? si <input type="radio" name="hermanos_sanos" value="si"> no <input type="radio" name="hermanos_sanos" value="no"></p>
+                        <p>Sufre de alguna enfermedad? si <input type="radio" name="hermanos_enfermedad_si_no" value="si"> no <input type="radio" name="hermanos_enfermedad_si_no" value="no" required></p>
+                        <p>De que? <input type="text" name="hermanos_de_que" id="hermanos"></p>
+                        <p>Hace algun tratamiento medico? si <input type="radio" name="hermanos_tratamiento" value="si"> no <input type="radio" name="hermanos_tratamiento" value="no" required></p>
+                        <p>Cual? <input type="text" name="hermanos_cual" id="hermanos"></p>
+                        <p>Que medicamento/s consume normalmente? <input type="text" name="hermanos_medicamentos" id="hermanos" required></p>
+
+                        <p>Que medicamentos ha consumido en los ultimos 5 años? <input type="text" name="medicamentos_5_anos" id="hermanos" required></p>
+
+                        <p>Realiza algun deporte? si <input type="radio" name="deporte" value="si"> no <input type="radio" name="deporte" value="no" required></p>
+                        <p>Nota malestar al realizarlo? si <input type="radio" name="deporte_malestar" value="si"> no <input type="radio" name="deporte_malestar" value="no"></p>
+
+                        <p>Es alergico a alguna droga?(anestesia/penicilina/otros)<input type="text" name="alergia" required></p>
+                        <p>Cuando le sacan una muela o se lastima, cicatriza bien? Sangra mucho? <input type="text" name="cicatrizacion" required></p>
+                        <p>Tiene problemas de colageno (hiperflexitud)? <input type="radio" name="problemas de colageno" required></p>
+                        <p>Tiene antecedentes de fiebre reumatica? si <input type="radio" name="fiebre reumatica" value="si"> no <input type="radio" name="fiebre reumatica" value="no" required></p>
+                        <p>Se protege con alguna medicación? <input type="text" name="proteccion" required></p>
+                        
+                        <p>Es diabetico? si <input type="radio" name="diabetico" value="si"> no <input type="radio" name="diabetico" value="no" required></p>
+                        <p>Esta controlado? si <input type="radio" name="diabetico_controlado" value="si"> no <input type="radio" name="diabetico_controlado" value="no" required> Con que? <input type="text" name="diabetico_con_que" required></p>
+
+                        <p>Tiene algun problema cradiaco? si <input type="radio" name="cardiaco" value="si"> no <input type="radio" name="cardiaco" value="no" required></p>
+                        <p>Cual? <input type="text" name="cardiaco_cual" required></p>
+                    </div>
+                </div>
+
+                <div class="columna">
+                    <div class="bloque-preguntas">
+                        <p>Toma seguido aspirina y/o anticuagulante? si <input type="radio" name="aspirina" value="si"> no <input type="radio" name="aspirina" value="no" required></p>
+                        <p>Con que frecuencia? <input type="text" name="aspirina_frecuencia" required></p>
+                        <p>Tiene presion alta? si <input type="radio" name="presion" value="si"> no <input type="radio" name="presion" value="no" required></p>
+                        <p>Chagas? si <input type="radio" name="chagas" value="si"> no <input type="radio" name="chagas" value="no" required></p>
+                        <p>Esta en tratamiento? <input type="text" name="tratamiento"></p>
+                        <p>Tiene problemas renales? si <input type="radio" name="renales" value="si"> no <input type="radio" name="renales" value="no"></p>
+                        <p>Ulcera gastrica? si <input type="radio" name="ulcera" value="si"> no <input type="radio" name="ulcera" value="no"></p>
+                        <p>Tuvo hepatitis? si <input type="radio" name="hepatitis" value="si"> no <input type="radio" name="hepatitis" value="no"></p>
+                        <p>De que tipo? <input type="text" name="hepatitis_tipo"></p>
+                        <p>Tiene algun problema hepatico? si <input type="radio" name="hepatico" value="si"> no <input type="radio" name="hepatico" value="no"></p>
+                        <p>Cual? <input type="text" name="hepatico_cual"></p>
+                        <p>Tuvo convulsiones? si <input type="radio" name="convulsiones" value="si"> no <input type="radio" name="convulsiones" value="no"></p>
+                        <p>Es epiléptico? si <input type="radio" name="epileptico" value="si"> no <input type="radio" name="epileptico" value="no"></p>
+                        <p>Medicación que toma: <input type="text" name="epileptico_medicacion"></p>
+                        <p>Ha tenido Sífilis o Gonorrea? si <input type="radio" name="sifilis_gonorrea" value="si"> no <input type="radio" name="sifilis_gonorrea" value="no"></p>
+                        <p>Otra enfermedad infecto-contagiosa? si <input type="radio" name="infecto_contagiosa" value="si"> no <input type="radio" name="infecto_contagiosa" value="no"></p>
+                        <p>Tuvo transfusiones? si <input type="radio" name="transfusiones" value="si"> no <input type="radio" name="transfusiones" value="no"></p>
+                        <p>Fue operado alguna vez? si <input type="radio" name="operado" value="si"> no <input type="radio" name="operado" value="no"></p>
+                        <p>De qué? <input type="text" name="operado_de_que"> Cuando? <input type="text" name="operado_cuando"></p>
+                        <p>Tiene algún problema respiratorio? si <input type="radio" name="problema_respiratorio" value="si"> no <input type="radio" name="problema_respiratorio" value="no"> Cuál? <input type="text" name="problema_respiratorio_cual"></p>
+                        <p>Fuma? si <input type="radio" name="fuma" value="si"> no <input type="radio" name="fuma" value="no"></p>
+                        <p>Está embarazada? si <input type="radio" name="embarazada" value="si"> no <input type="radio" name="embarazada" value="no"> De cuántos meses? <input type="text" name="embarazada_meses"></p>
+                        <p>Hay alguna otra enfermedad o recomendación de su médico que quiera dejar constancia? si <input type="radio" name="recomendacion_medico" value="si"> no <input type="radio" name="recomendacion_medico" value="no"> Cuál? <input type="text" name="recomendacion_medico_cual"></p>
+                        <p>Realiza algun tipo de tratamiento homeopatico, Acupuntura, otros? <input type="text" name="homeopatico"></p>
+                        <p>Medico clinico: <input type="text" name="medico_clinico"></p>
+                        <p>Clinica/Hospital en caso de hacer falta derivacion: <input type="text" name="derivacion"></p>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <h3>Historial Clinica Odontologica</h3>
+            
+            <div class="bloque-preguntas">
+                <p>Por qué asistió a la consulta? <input type="text" name="motivo_consulta"></p>
+                <p>Consultó antes con algún otro profesional? si <input type="radio" name="consulto_otro_profesional" value="si"> no <input type="radio" name="consulto_otro_profesional" value="no"></p>
+                <p>Tomó algún medicamento? si <input type="radio" name="tomo_medicamento" value="si"> no <input type="radio" name="tomo_medicamento" value="no"></p>
+                <p>Nombre de los medicamentos: <input type="text" name="nombre_medicamentos"></p>
+                <p>Desde cuando? <input type="text" name="cuando_medicamentos"></p>
+                <p>Obtuvo resultados? si <input type="radio" name="obtengo_resultados" value="si"> no <input type="radio" name="obtengo_resultados" value="no"></p>
+                
+                <p>Ha tenido dolor? si <input type="radio" name="ha_tenido_dolor" value="si"> no <input type="radio" name="ha_tenido_dolor" value="no"></p>
+                <p>De qué tipo?
+                    Suave <input type="checkbox" name="tipo_dolor_suave" value="si">
+                    Moderado <input type="checkbox" name="tipo_dolor_moderado" value="si">
+                    Intenso <input type="checkbox" name="tipo_dolor_intenso" value="si">
+                    Temporario <input type="checkbox" name="tipo_dolor_temporario" value="si">
+                    Intermitente <input type="checkbox" name="tipo_dolor_intermitente" value="si">
+                    Continuo <input type="checkbox" name="tipo_dolor_continuo" value="si">
+                    Espontáneo <input type="checkbox" name="tipo_dolor_espontaneo" value="si">
+                    Provocado <input type="checkbox" name="tipo_dolor_provocado" value="si">
+                    Al frio <input type="checkbox" name="tipo_dolor_frio" value="si">
+                    Al calor <input type="checkbox" name="tipo_dolor_calor" value="si">
+                </p>
+                <p>Localizado dónde? <input type="text" name="dolor_localizado"></p>
+                <p>Irradiado hacia dónde? <input type="text" name="dolor_irradiado"></p>
+                <p>Puede calmarlo con algo? <input type="text" name="dolor_calmar"></p>
+                <p>Sufrió algún golpe en los dientes? si <input type="radio" name="golpe_dientes" value="si"> no <input type="radio" name="golpe_dientes" value="no"> Cuando? <input type="text" name="golpe_dientes_cuando"> Cómo se produjo? <input type="text" name="golpe_diente_como"></p>
+                <p>Se le fracturó algún diente? si <input type="radio" name="fractura_diente" value="si"> no <input type="radio" name="fractura_diente" value="no"> Cuál? <input type="text" name="fractura_diente_cual"> Recibio algun tratamiento? <input type="text" name="fractura_diente_tratamiento"></p>
+                
+                <p>Tiene dificultad para hablar? si <input type="radio" name="dificultad_hablar" value="si"> no <input type="radio" name="dificultad_hablar" value="no"></p>
+                <p>Para masticar? si <input type="radio" name="dificultad_masticar" value="si"> no <input type="radio" name="dificultad_masticar" value="no"></p>
+                <p>Para abrir la boca? si <input type="radio" name="dificultad_abrir_boca" value="si"> no <input type="radio" name="dificultad_abrir_boca" value="no"></p>
+                <p>Para tragar los alimentos? si <input type="radio" name="dificultad_tragar" value="si"> no <input type="radio" name="dificultad_tragar" value="no"></p>
+                
+                <p>Ha observado algo anormal en los labios? si <input type="radio" name="anormal_labios" value="si"> no <input type="radio" name="anormal_labios" value="no"></p>
+                <p>Lengua? <input type="checkbox" name="anormal_lengua" value="si"> 
+                   Paladar? <input type="checkbox" name="anormal_paladar" value="si"> 
+                   Piso de boca? <input type="checkbox" name="anormal_piso_boca" value="si"> 
+                   Carrillos? <input type="checkbox" name="anormal_carrillos" value="si"> 
+                   Rebordes? <input type="checkbox" name="anormal_rebordes" value="si"> 
+                   Trigono retromolar? <input type="checkbox" name="anormal_trigono" value="si">
+                </p>
+                
+                <p>Qué tipo de lesiones presenta: 
+                   Manchas? <input type="checkbox" name="lesion_manchas" value="si"> 
+                   Abultamiento de los tejidos? <input type="checkbox" name="lesion_abultamiento" value="si"> 
+                   Ulceraciones? <input type="checkbox" name="lesion_ulceraciones" value="si"> 
+                   Ampollas? <input type="checkbox" name="lesion_ampollas" value="si">
+                </p>
+                <p>Otros: <input type="text" name="lesion_otros"></p>
+                <p>Le sangran las encías? si <input type="radio" name="sangran_encias" value="si"> no <input type="radio" name="sangran_encias" value="no"> Cuándo? <input type="text" name="sangran_encias_cuando"></p>
+                <p>Sale pus de algún lugar de su boca? si <input type="radio" name="sale_pus" value="si"> no <input type="radio" name="sale_pus" value="no"> De dónde? <input type="text" name="sale_pus_donde"></p>
+                <p>Tiene movilidad en sus dientes? si <input type="radio" name="movilidad_dientes" value="si"> no <input type="radio" name="movilidad_dientes" value="no"></p>
+                <p>Al morder siente altos los dientes? si <input type="radio" name="morder_alto" value="si"> no <input type="radio" name="morder_alto" value="no"></p>
+                <p>Ha tenido la cara hinchada? si <input type="radio" name="cara_hinchada" value="si"> no <input type="radio" name="cara_hinchada" value="no"></p>
+                <p>Se puso hielo? si <input type="radio" name="puso_hielo" value="si"> no <input type="radio" name="puso_hielo" value="no"> Calor? si <input type="radio" name="puso_calor" value="si"> no <input type="radio" name="puso_calor" value="no"> Otros? <input type="text" name="puso_otros"></p>
+                <p>Momentos de azúcar diario: <input type="text" name="azucar_diario"></p>
+                <p>Indice de placa: <input type="text" name="indice_placa"></p>
+                <p>Estado de la higiene bucal: 
+                    Muy bueno <input type="radio" name="higiene_bucal" value="muy_bueno"> 
+                    Bueno <input type="radio" name="higiene_bucal" value="bueno"> 
+                    Deficiente <input type="radio" name="higiene_bucal" value="deficiente"> 
+                    Malo <input type="radio" name="higiene_bucal" value="malo">
+                </p>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button type="submit" style="background-color: #2e5bff; color: white; border: none; padding: 15px 40px; font-size: 18px; border-radius: 6px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(46,91,255,0.3);">
+                    💾 GUARDAR / ACTUALIZAR DATOS
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+<script src="script.js"></script>
+</body>
+</html>
