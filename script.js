@@ -1,16 +1,24 @@
-// ==========================================
-// CONFIGURACIÓN DE TU GOOGLE FIREBASE:
-// ==========================================
-const firebaseConfig = {
-    apiKey: "TU_API_KEY_REAL",
-    authDomain: "TU_PROYECTO.firebaseapp.com",
-    projectId: "TU_PROJECT_ID",
-    storageBucket: "TU_BUCKET.appspot.com",
-    messagingSenderId: "TU_MESSAGING_ID",
-    appId: "TU_APP_ID"
-};
-// ==========================================
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBRd3SzTPFqalFWrM_mqOmPiPXc1sncHSY",
+  authDomain: "consultorio-ucc.firebaseapp.com",
+  projectId: "consultorio-ucc",
+  storageBucket: "consultorio-ucc.firebasestorage.app",
+  messagingSenderId: "382287100053",
+  appId: "1:382287100053:web:615ecbbd1aa69caf70839c",
+  measurementId: "G-ESZ01025TC"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);// Inicializar Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
@@ -18,24 +26,21 @@ const db = firebase.firestore();
 document.getElementById('formPrincipal').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Agarra todos los inputs del formulario automáticamente
     const fichaPaciente = Object.fromEntries(new FormData(e.target).entries());
     fichaPaciente.guardadoEl = new Date();
     
-    // Validamos el DNI
     const dni = document.getElementById('documento').value;
     if (!dni) return alert("⚠️ Es obligatorio ingresar el N° de Documento del paciente.");
 
-    // Guarda en la nube. Si el DNI ya existía, reescribe los datos actualizándolos
     db.collection("historias_clinicas").doc(dni).set(fichaPaciente)
         .then(() => {
-            alert("✅ ¡Perfecto! Historia clínica procesada y guardada con éxito en la nube.");
-            document.getElementById('formPrincipal').reset(); // Limpia el formulario
+            alert("✅ ¡Perfecto! Historia clínica guardada con éxito en la nube.");
+            document.getElementById('formPrincipal').reset();
         })
         .catch(error => alert("❌ Error al guardar en Firebase: " + error.message));
 });
 
-// 2. ESCUCHAR EL BOTÓN BUSCAR DE LA BARRA SUPERIOR
+// 2. ESCUCHAR EL BOTÓN BUSCAR
 document.getElementById('btn-buscar').addEventListener('click', () => {
     const dniBuscar = document.getElementById('txt-buscar-dni').value;
     if (!dniBuscar) return alert("⚠️ Por favor, ingrese un número de documento para buscar.");
@@ -44,7 +49,6 @@ document.getElementById('btn-buscar').addEventListener('click', () => {
         if (doc.exists) {
             const datos = doc.data();
             
-            // Recorremos las respuestas traídas de Firebase y rellenamos cada input del formulario
             Object.keys(datos).forEach(key => {
                 const elementos = document.querySelectorAll(`[name="${key}"]`);
                 elementos.forEach(el => {
@@ -57,9 +61,9 @@ document.getElementById('btn-buscar').addEventListener('click', () => {
                     }
                 });
             });
-            alert("📥 Ficha cargada. Modifique las respuestas necesarias y vuelva a pulsar el botón 'Guardar' al final.");
+            alert("📥 Ficha cargada con éxito.");
         } else {
-            alert("❌ No se encontró ningún paciente registrado con el DNI: " + dniBuscar);
+            alert("❌ No se encontró ningún paciente con el DNI: " + dniBuscar);
         }
     }).catch(error => alert("❌ Error en la búsqueda: " + error.message));
 });
